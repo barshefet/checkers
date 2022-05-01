@@ -1,0 +1,17 @@
+table {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.light-box{
+    background-color: antiquewhite;
+    width: 80px;
+    height: 80px;
+}
+
+.dark-box {
+    background-color: black;
+    width: 80px;
+    height: 80px;
+}
