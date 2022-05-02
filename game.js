@@ -7,11 +7,21 @@ const WHITE_PLAYER = "white";
 let table;
 let boardData;
 let pieces;
+let selectedCell;
 
 //a class which keeps track of the positioning of all the pieces
 class BoardData {
   constructor(pieces) {
     this.pieces = pieces;
+  }
+  
+  
+  getPiece(row, col) {
+    for (const piece of this.pieces) {
+      if (piece.row === row && piece.col === col) {
+        return piece;
+      }
+    }
   }
 }
 
@@ -42,6 +52,11 @@ class Piece {
     this.col = col;
     this.player = player;
   }
+
+
+  getPossibleMoves(boardData){
+
+  }
 }
 //add image of pieces to their boardData locations
 function addImage(cell, player) {
@@ -50,6 +65,24 @@ function addImage(cell, player) {
   image.draggable = false;
   cell.appendChild(image);
 }
+
+//initiated by the event listener. shows the cell the user selected and possible moves.
+function onCellClick(event, row, col){
+  console.log("row " + row);
+  console.log("col " + col);
+
+  for (let i = 0; i < BOARD_SIZE; i++) {
+    for (let j = 0; j < BOARD_SIZE; j++) {
+      table.rows[i].cells[j].classList.remove('possible-move');
+      table.rows[i].cells[j].classList.remove('selected');
+    }
+  }
+  table.rows[row].cells[col].classList.add('selected');
+  const Piece = boardData.getPiece(row, col);
+
+}
+
+
 
 //creates the board + initial places of the pieces.
 function intializeGame() {
@@ -79,7 +112,7 @@ function createBoard(boardData) {
       } else {
         cell.className = "dark-box";
       }
-      //cell.addEventListener("click", (event) => onCellClick(event, row, col));
+      cell.addEventListener("click", (event) => onCellClick(event, row, col));
     }
   }
   for (let piece of boardData.pieces) {
