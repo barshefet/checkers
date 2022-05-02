@@ -6,19 +6,19 @@ table {
 
 .light-box{
     background-color: antiquewhite;
-    width: 80px;
-    height: 80px;
+    width: 70px;
+    height: 70px;
 }
 
 .dark-box {
     background-color: rgb(41, 9, 39);
-    width: 80px;
-    height: 80px;
+    width: 70px;
+    height: 70px;
 }
 
 img {
-    width: 70px;
-    height: 70px;
+    width: 60px;
+    height: 60px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -32,4 +32,32 @@ img {
 .possible-move{
     background-color: rgb(175, 185, 214);
 
+}
+
+.upper-banner{
+    display: flex;
+}
+
+h1{
+    font-size: 67px;
+  font-family: "My Soul", cursive;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 5px;
+  margin-top: 0px;
+  color: rgb(53, 53, 53);
+  margin-left: 560px;
+}
+
+h2{
+  margin-left: 550px;
+  display: flex;
+}
+
+.reset{
+    width: 100px;
+    height: 80px;
+    border-radius: 20px;
+    margin-top: 10px;
 }
