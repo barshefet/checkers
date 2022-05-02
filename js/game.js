@@ -23,6 +23,26 @@ class BoardData {
       }
     }
   }
+
+  removePiece(row, col) {
+    for (let i = 0; i < this.pieces.length; i++) {
+      const piece = this.pieces[i];
+      if (piece.row === row && piece.col === col) {
+        // Remove piece at index i
+        this.pieces.splice(i, 1);
+        return piece;
+      }
+    }
+  }
+
+  isEmpty(row, col) {
+    return this.getPiece(row, col) === undefined;
+  }
+
+  isPlayer(row, col, player) {
+    const piece = this.getPiece(row, col);
+    return piece !== undefined && piece.player === player;
+  }
 }
 
 //defines the location of all the pieces at the start of the game
@@ -43,9 +63,7 @@ function getInitialPieces() {
   return result;
 }
 
-
-
-//class that will store all our pieces
+//class that will store information about each piece and the possible moves it has.
 class Piece {
   constructor(row, col, player) {
     this.row = row;
@@ -54,10 +72,52 @@ class Piece {
   }
 
 
-  getPossibleMoves(boardData){
+  getPossibleMoves(BoardData){
+   let moves = [];
+   if(this.player === BLACK_PLAYER){
+     //to be +1, +1
+     moves = this.getBlackMoves(BoardData);
+   }
+   if(this.player === WHITE_PLAYER){
+     //to be -1 ,-1
+     moves = this.getWhiteMoves(boardData);
+   }
+
+   let filteredMoves = [];
+      for (const absoluteMove of moves) {
+        const absoluteRow = absoluteMove[0];
+        const absoluteCol = absoluteMove[1];
+        if (absoluteRow >= 0 && absoluteRow <= 7 && absoluteCol >= 0 && absoluteCol <= 7) {
+          filteredMoves.push(absoluteMove);
+        }
+      }
+      return filteredMoves;
+  }
+
+
+  getBlackMoves(BoardData){
+    let result = [];
+    let firstPosition = [this.row + 1, this.col + 1]
+    const piece = BoardData.getPiece(firstPosition[0], firstPosition[1]);
+    
+    result.push(firstPosition);
+    result.push([this.row + 1, this.col - 1]);
+    
+    return result;
+
+  }
+  
+  getWhiteMoves(){
+    let result = [];
+    result.push([this.row - 1, this.col - 1]);
+    result.push([this.row - 1, this.col + 1]);
+
+    return result;
 
   }
 }
+
+
 //add image of pieces to their boardData locations
 function addImage(cell, player) {
   const image = document.createElement("img");
@@ -77,9 +137,17 @@ function onCellClick(event, row, col){
       table.rows[i].cells[j].classList.remove('selected');
     }
   }
-  table.rows[row].cells[col].classList.add('selected');
-  const Piece = boardData.getPiece(row, col);
+  
+  const piece = boardData.getPiece(row, col);
+  if (piece !== undefined) {
+    let possibleMoves = piece.getPossibleMoves(piece);
+    for (let possibleMove of possibleMoves) {
+      const cell = table.rows[possibleMove[0]].cells[possibleMove[1]];
+      cell.classList.add('possible-move');
+    }
+  }
 
+  table.rows[row].cells[col].classList.add('selected');
 }
 
 

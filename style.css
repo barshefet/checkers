@@ -28,3 +28,8 @@ img {
 .selected {
     background-color: rgb(115, 122, 141);
 }
+
+.possible-move{
+    background-color: rgb(175, 185, 214);
+
+}
