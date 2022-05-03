@@ -8,9 +8,10 @@ let table;
 let game;
 let pieces;
 let selectedPiece;
+let capturedBlackCount = 0;
+let capturedWhiteCount = 0;
 
-
-//add image of pieces to their boardData locations
+//adds image of pieces that are black/white.
 function addImage(cell, player) {
   const image = document.createElement("img");
   image.src = "images/" + player + ".png";
@@ -18,22 +19,21 @@ function addImage(cell, player) {
   cell.appendChild(image);
 }
 
-//initiated by the event listener. shows the cell the user selected and possible moves.
+//initiated by the event listener. marks in classes selected cell and possible moves. and initiates the tryMove function.
 function onCellClick(event, row, col) {
   console.log("row " + row);
   console.log("col " + col);
 
   if (selectedPiece !== undefined && game.tryMove(selectedPiece, row, col)) {
     selectedPiece = undefined;
-    
+
     // Recreate whole board
     createBoard(game.boardData);
-    
   } else {
     tryUpdate(row, col);
   }
 }
-
+//
 function tryUpdate(row, col) {
   for (let i = 0; i < BOARD_SIZE; i++) {
     for (let j = 0; j < BOARD_SIZE; j++) {
@@ -53,10 +53,7 @@ function tryUpdate(row, col) {
 
   table.rows[row].cells[col].classList.add("selected");
   selectedPiece = piece;
-  
 }
-
-
 
 //creates the board of the game and peices according to boardData
 //TODO: addEvent listener "onclick"
@@ -88,14 +85,19 @@ function createBoard(boardData) {
     const cell = table.rows[piece.row].cells[piece.col];
     addImage(cell, piece.player);
   }
-
+  //if the captured pieces count reaches 12 than its game over.
+  if (capturedBlackCount === 12) {
+    game.winner = WHITE_PLAYER;
+  } else if (capturedWhiteCount === 12) {
+    game.winner = BLACK_PLAYER;
+  }
+   //shows end of game banner.
   if (game.winner !== undefined) {
-    const winnerPopup = document.createElement('div');
-    // black -> B + lack -> Black
+    const winnerPopup = document.createElement("div");
     const winner = game.winner.charAt(0).toUpperCase() + game.winner.slice(1);
-    winnerPopup.textContent = winner + ' player wins!';
-    winnerPopup.classList.add('winner-dialog');
-    table.appendChild(winnerPopup)
+    winnerPopup.textContent = winner + " player wins!";
+    winnerPopup.classList.add("winner-dialog");
+    table.appendChild(winnerPopup);
   }
 }
 

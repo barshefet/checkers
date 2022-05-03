@@ -9,6 +9,7 @@ table {
     width: 70px;
     height: 70px;
     outline: black solid 1px;
+    user-select: none;
 }
 
 .dark-box {
@@ -16,6 +17,7 @@ table {
     width: 70px;
     height: 70px;
     outline: black solid 1px;
+    user-select: none;
 }
 
 img {
@@ -62,4 +64,17 @@ h1{
 
 body {
     background-color: bisque;
+}
+
+.winner-dialog{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background: rgb(96, 66, 66);
+    padding: 50;
+    border-radius: 10px;
+    width: max-content;
+    font-size: x-large;
+    
 }
