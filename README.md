@@ -1,3 +1,7 @@
 # checkers
 the link:
-https://drive.google.com/file/d/1kN5nx17xFrMqW9bBy8awqRMsXLYUj5gh/view?usp=sharing
+https://drive.google.com/file/d/11t_HSzlGqkrbbMvYGEnGjpvVdDiT7huu/view?usp=sharing
+
+1. introduction: first 10 seconds.
+2. UI show: until 2:10.
+3. code show: 2:10 - end of video
