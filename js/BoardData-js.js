@@ -49,4 +49,6 @@ class BoardData {
       const piece = this.getPiece(row, col);
       return piece !== undefined && piece.player === player;
     }
+
+   
   }

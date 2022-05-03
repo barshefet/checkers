@@ -25,8 +25,10 @@ function onCellClick(event, row, col) {
 
   if (selectedPiece !== undefined && game.tryMove(selectedPiece, row, col)) {
     selectedPiece = undefined;
+    
     // Recreate whole board
     createBoard(game.boardData);
+    
   } else {
     tryUpdate(row, col);
   }
@@ -51,7 +53,10 @@ function tryUpdate(row, col) {
 
   table.rows[row].cells[col].classList.add("selected");
   selectedPiece = piece;
+  
 }
+
+
 
 //creates the board of the game and peices according to boardData
 //TODO: addEvent listener "onclick"
@@ -82,6 +87,15 @@ function createBoard(boardData) {
   for (let piece of boardData.pieces) {
     const cell = table.rows[piece.row].cells[piece.col];
     addImage(cell, piece.player);
+  }
+
+  if (game.winner !== undefined) {
+    const winnerPopup = document.createElement('div');
+    // black -> B + lack -> Black
+    const winner = game.winner.charAt(0).toUpperCase() + game.winner.slice(1);
+    winnerPopup.textContent = winner + ' player wins!';
+    winnerPopup.classList.add('winner-dialog');
+    table.appendChild(winnerPopup)
   }
 }
 

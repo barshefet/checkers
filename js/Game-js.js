@@ -34,7 +34,7 @@ class Game {
         piece.row = row;
         piece.col = col;
         this.currentPlayer = piece.getOpponent();
-        
+        game.gameWinner(game.boardData);
         return true;
       }
     }
@@ -46,5 +46,17 @@ class Game {
         return [];
       }
       return piece.getPossibleMoves(this.boardData);
+    }
+
+    gameWinner(boardData){
+      for (let i = 0; i < BOARD_SIZE; i++) {
+        for (let j = 0; j < BOARD_SIZE; j++) {
+          if(boardData.isPlayer(i, j, BLACK_PLAYER) === undefined){
+            this.winner = BLACK_PLAYER;
+          }else if(boardData.isPlayer(i, j, WHITE_PLAYER) === undefined){
+            this.winner = WHITE_PLAYER;
+          }
+        }
+      }
     }
   }

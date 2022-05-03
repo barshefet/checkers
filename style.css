@@ -8,12 +8,14 @@ table {
     background-color: antiquewhite;
     width: 70px;
     height: 70px;
+    outline: black solid 1px;
 }
 
 .dark-box {
     background-color: rgb(41, 9, 39);
     width: 70px;
     height: 70px;
+    outline: black solid 1px;
 }
 
 img {
@@ -56,4 +58,8 @@ h1{
     height: 80px;
     border-radius: 20px;
     margin-top: 10px;
+}
+
+body {
+    background-color: bisque;
 }
