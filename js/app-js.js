@@ -9,6 +9,7 @@ let game;
 let pieces;
 let selectedPiece;
 
+
 //add image of pieces to their boardData locations
 function addImage(cell, player) {
   const image = document.createElement("img");
@@ -24,7 +25,7 @@ function onCellClick(event, row, col) {
 
   if (selectedPiece !== undefined && game.tryMove(selectedPiece, row, col)) {
     selectedPiece = undefined;
-    // Recreate whole board - this is not efficient, but doesn't affect user experience
+    // Recreate whole board
     createBoard(game.boardData);
   } else {
     tryUpdate(row, col);
