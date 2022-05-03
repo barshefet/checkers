@@ -43,32 +43,50 @@ class Piece {
   getBlackMoves(boardData) {
     let result = [];
     
-
+    let jump = [this.row + 2, this.col - 2]
     let position = [this.row + 1, this.col - 1];
+    
     if(boardData.isEmpty(position[0], position[1])){
     result.push(position);
+    } else if(boardData.isPlayer(position[0], position[1], this.getOpponent()) && boardData.isEmpty(jump[0], jump[1])){
+     result.push(jump); 
+     
     }
-
+    
+    jump = [this.row + 2, this.col + 2]
     position = [this.row + 1, this.col + 1];
+    
     if(boardData.isEmpty(position[0], position[1])){
     result.push(position);
+    } else if(boardData.isPlayer(position[0], position[1], this.getOpponent()) && boardData.isEmpty(jump[0], jump[1])){
+     result.push(jump);  
     }
 
+  
     return result;
   }
 
   getWhiteMoves(boardData) {
     let result = [];
 
+    let jump = [this.row - 2, this.col - 2]
     let position = [this.row - 1, this.col - 1];
+    
     if(boardData.isEmpty(position[0], position[1])){
     result.push(position);
+    } else if(boardData.isPlayer(position[0], position[1], this.getOpponent()) && boardData.isEmpty(jump[0], jump[1])){
+     result.push(jump);  
     }
-
+    
+    jump = [this.row - 2, this.col + 2]
     position = [this.row - 1, this.col + 1];
+    
     if(boardData.isEmpty(position[0], position[1])){
     result.push(position);
+    } else if(boardData.isPlayer(position[0], position[1], this.getOpponent()) && boardData.isEmpty(jump[0], jump[1])){
+     result.push(jump);  
     }
+   
     return result;
   }
 }

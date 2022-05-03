@@ -9,13 +9,6 @@ let game;
 let pieces;
 let selectedPiece;
 
-
-
-
-
-
-
-
 //add image of pieces to their boardData locations
 function addImage(cell, player) {
   const image = document.createElement("img");
@@ -25,28 +18,24 @@ function addImage(cell, player) {
 }
 
 //initiated by the event listener. shows the cell the user selected and possible moves.
-function onCellClick(event, row, col){
+function onCellClick(event, row, col) {
   console.log("row " + row);
   console.log("col " + col);
-  
+
   if (selectedPiece !== undefined && game.tryMove(selectedPiece, row, col)) {
     selectedPiece = undefined;
     // Recreate whole board - this is not efficient, but doesn't affect user experience
     createBoard(game.boardData);
   } else {
-  tryUpdate(row, col);
- }
+    tryUpdate(row, col);
+  }
 }
-
-
-
-
 
 function tryUpdate(row, col) {
   for (let i = 0; i < BOARD_SIZE; i++) {
     for (let j = 0; j < BOARD_SIZE; j++) {
-      table.rows[i].cells[j].classList.remove('possible-move');
-      table.rows[i].cells[j].classList.remove('selected');
+      table.rows[i].cells[j].classList.remove("possible-move");
+      table.rows[i].cells[j].classList.remove("selected");
     }
   }
 
@@ -55,17 +44,17 @@ function tryUpdate(row, col) {
     let possibleMoves = game.getPossibleMoves(piece);
     for (let possibleMove of possibleMoves) {
       const cell = table.rows[possibleMove[0]].cells[possibleMove[1]];
-      cell.classList.add('possible-move');
+      cell.classList.add("possible-move");
     }
   }
 
-  table.rows[row].cells[col].classList.add('selected');
+  table.rows[row].cells[col].classList.add("selected");
   selectedPiece = piece;
 }
 
 //creates the board of the game and peices according to boardData
 //TODO: addEvent listener "onclick"
-function createBoard(boardData){
+function createBoard(boardData) {
   table = document.getElementById(CHESS_BOARD_ID);
   if (table !== null) {
     //deletes previous board

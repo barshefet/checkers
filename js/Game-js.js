@@ -8,6 +8,7 @@ class Game {
   // Tries to actually make a move. Returns true if successful.
   tryMove(piece, row, col) {
     const possibleMoves = this.getPossibleMoves(piece);
+    
     // possibleMoves looks like this: [[1,2], [3,2]]
     for (const possibleMove of possibleMoves) {
       // possibleMove looks like this: [1,2]
