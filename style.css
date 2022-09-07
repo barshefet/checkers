@@ -43,15 +43,12 @@ img {
 }
 
 h1{
-    font-size: 67px;
+  font-size: 67px;
   font-family: "My Soul", cursive;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   margin-bottom: 5px;
   margin-top: 0px;
   color: rgb(53, 53, 53);
-  margin-left: 560px;
+  margin-left: 39%;
 }
 
 
